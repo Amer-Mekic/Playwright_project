@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { AbstractPage } from './AbstractPage';
 
 export class RegisterPage extends AbstractPage {
@@ -28,7 +28,7 @@ export class RegisterPage extends AbstractPage {
     this.usernameField = page.locator('#customer\\.username');
     this.passwordField = page.locator('#customer\\.password');
     this.confirmPasswordField = page.locator('#repeatedPassword');
-    this.registerButton = page.locator('input[type="submit"]');
+    this.registerButton = page.locator('input[value="Register"]');
   }
 
   async visit(): Promise<void> {
