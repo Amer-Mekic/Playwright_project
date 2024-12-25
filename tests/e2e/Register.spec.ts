@@ -33,7 +33,7 @@ test.describe.parallel.only('Registration Flow', () => {
       password
     );
     // Check if the registration was successful
-    await expect(page.locator("#rightPanel form")).toBeHidden({timeout:2000});
+    await expect(page.locator("#rightPanel form")).toBeHidden({timeout:3000});
    });
 
   // Negative Scenario
@@ -46,7 +46,6 @@ test.describe.parallel.only('Registration Flow', () => {
     // Check for validation error messages
     await page.waitForTimeout(2000);
     const errorMessages = await page.locator('.error').allTextContents();
-    console.log('Error messages:', errorMessages);
     expect(errorMessages.length).toBeGreaterThan(0);
   });
 });

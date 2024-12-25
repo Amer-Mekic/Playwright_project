@@ -25,9 +25,12 @@ export class LoginPage extends AbstractPage {
     await this.loginButton.click();
   }
 
-  async assertErrorMessage() {
+  async assertWrongRedirect() {
     await expect(this.page).toHaveURL(
       /.*login\.htm.*/
     )
+  }
+  async assertErrorMessage() {
+    await expect(this.page.locator('.error')).toBeVisible();
   }
 }
