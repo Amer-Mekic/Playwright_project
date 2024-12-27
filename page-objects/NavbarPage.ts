@@ -1,49 +1,53 @@
 import { Locator, Page } from '@playwright/test';
 import { AbstractPage } from './AbstractPage';
 
-export class NavbarPage extends AbstractPage {
-  readonly solutionsLink: Locator;
-  readonly aboutUsLink: Locator;
-  readonly servicesLink: Locator;
-  readonly productsLink: Locator;
-  readonly locationsLink: Locator;
-  readonly adminPageLink: Locator;
+export class NavbarPage {
+  page: Page;
+  
+  private solutionsLink: Locator;
+  private aboutUsLink: Locator;
+  private servicesLink: Locator;
+  private productsLink: Locator;
+  private locationsLink: Locator;
+  private adminPageLink: Locator;
 
   constructor(page: Page) {
-    super(page);
-    this.solutionsLink = page.locator('a[href="solutions.htm"]');
-    this.aboutUsLink = page.locator('a[href="about.htm"]');
-    this.servicesLink = page.locator('a[href="services.htm"]');
-    this.productsLink = page.locator('a[href="products.htm"]');
-    this.locationsLink = page.locator('a[href="locations.htm"]');
-    this.adminPageLink = page.locator('a[href="admin.htm"]');
+    this.page = page;
+    this.solutionsLink = page.locator('ul.leftmenu li.Solutions');
+    this.aboutUsLink = page.locator('ul.leftmenu li a[href="https://parabank.parasoft.com/parabank/about.htm"]');
+    this.servicesLink = page.locator('ul.leftmenu li a[href="https://parabank.parasoft.com/parabank/services.htm"]');
+    this.productsLink = page.locator('ul.leftmenu li a[href="https://www.parasoft.com/products/"]');
+    this.locationsLink = page.locator('ul.leftmenu li a[href="https://www.parasoft.com/solutions/"]');
+    this.adminPageLink = page.locator('ul.leftmenu li a[href="https://parabank.parasoft.com/parabank/admin.htm"]');
   }
 
-  async visit(): Promise<void> {
-    await this.navigateTo('https://parabank.parasoft.com/parabank/index.htm');
-  }
-
-  async visitSolutions(): Promise<void> {
-    await this.solutionsLink.click();
-  }
-
-  async visitAboutUs(): Promise<void> {
+  async clickAboutUs(): Promise<void> {
+    await this.aboutUsLink.waitFor({ state: 'visible', timeout: 10000 }); 
     await this.aboutUsLink.click();
   }
 
-  async visitServices(): Promise<void> {
+  async clickServices(): Promise<void> {
+    await this.servicesLink.waitFor({ state: 'visible', timeout: 10000 }); 
     await this.servicesLink.click();
   }
 
-  async visitProducts(): Promise<void> {
+  async clickProducts(): Promise<void> {
+    await this.productsLink.waitFor({ state: 'visible', timeout: 10000 }); 
     await this.productsLink.click();
   }
 
-  async visitLocations(): Promise<void> {
+  async clickLocations(): Promise<void> {
+    await this.locationsLink.waitFor({ state: 'visible', timeout: 10000 }); 
     await this.locationsLink.click();
   }
 
-  async visitAdminPage(): Promise<void> {
+  async clickAdminPage(): Promise<void> {
+    await this.adminPageLink.waitFor({ state: 'visible', timeout: 10000 }); 
     await this.adminPageLink.click();
+  }
+
+  async clickSolutions(): Promise<void> {
+    await this.solutionsLink.waitFor({ state: 'visible', timeout: 10000 }); 
+    await this.solutionsLink.click();
   }
 }
