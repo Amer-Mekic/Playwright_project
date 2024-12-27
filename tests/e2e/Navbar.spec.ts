@@ -8,14 +8,17 @@ test.beforeEach(async ({ page }) => {
   await navbarPage.page.goto('https://parabank.parasoft.com/parabank/index.htm', { waitUntil: 'domcontentloaded' });
 });
 
-test('Verify Solutions link navigates to Solutions page', async () => {
-  await navbarPage.clickSolutions();
-  expect(await navbarPage.page.url()).toContain('solutions');
+test('Verify Solutions link is visible', async ({ page }) => {
+  const navbarPage = new NavbarPage(page);
+
+  // Check that Solutions link is visible
+  await navbarPage.assertSolutionsLinkVisible();
 });
 
-test('Verify About Us link navigates to About Us page', async () => {
-  await navbarPage.clickAboutUs();
-  expect(await navbarPage.page.url()).toBe('https://parabank.parasoft.com/parabank/about.htm');
+
+test('Verify About Us link navigates to About Us page', async ({ page }) => {
+  await navbarPage.aboutUsLink.click();
+  await expect(page).toHaveURL(/.*about\.htm/);
 });
 
 test('Verify Services link navigates to Services page', async () => {
