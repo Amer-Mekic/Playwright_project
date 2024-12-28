@@ -19,30 +19,15 @@ test.describe('Account Services', () => {
   });
 
   test('Verify Account Services links after login', async ({ page }) => {
-   
+    const accountService = new AccountService(page);
+  
     await accountService.clickOpenNewAccount();
-    await expect(page).toHaveURL(/.*openaccount/);
-
-    await page.waitForSelector('a[href="overview.htm"]');
     await accountService.clickAccountsOverview();
-    await expect(page).toHaveURL(/.*overview/);
-
     await accountService.clickTransferFunds();
-    await expect(page).toHaveURL(/.*transfer/);
-
     await accountService.clickBillPay();
-    await expect(page).toHaveURL(/.*billpay/);
-
     await accountService.clickFindTransactions();
-    await expect(page).toHaveURL(/.*findtrans/);
-
     await accountService.clickUpdateContactInfo();
-    await expect(page).toHaveURL(/.*updateprofile/);
-
     await accountService.clickRequestLoan();
-    await expect(page).toHaveURL(/.*requestloan/);
-
     await accountService.clickLogOut();
-    await expect(page).toHaveURL('https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC');
   });
 });

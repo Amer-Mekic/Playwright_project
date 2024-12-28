@@ -26,33 +26,41 @@ export class AccountService extends AbstractPage {
 
   async clickOpenNewAccount() {
     await this.openNewAccountLink.click();
+    await expect(this.page).toHaveURL(/.*openaccount/);
   }
 
   async clickAccountsOverview() {
     await this.accountsOverviewLink.click();
+    await expect(this.page).toHaveURL(/.*overview/);
   }
 
   async clickTransferFunds() {
     await this.transferFundsLink.click();
+    await expect(this.page).toHaveURL(/.*transfer/);
   }
 
   async clickBillPay() {
     await this.billPayLink.click();
+    await expect(this.page).toHaveURL(/.*billpay/);
   }
 
   async clickFindTransactions() {
     await this.findTransactionsLink.click();
+    await expect(this.page).toHaveURL(/.*findtrans/);
   }
 
   async clickUpdateContactInfo() {
     await this.updateContactInfoLink.click();
+    await expect(this.page).toHaveURL(/.*updateprofile/);
   }
 
   async clickRequestLoan() {
     await this.requestLoanLink.click();
+    await expect(this.page).toHaveURL(/.*requestloan/);
   }
 
   async clickLogOut() {
     await this.logOutLink.click();
+    await expect(this.page).toHaveURL('https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC');
   }
 }
