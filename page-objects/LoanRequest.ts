@@ -8,14 +8,15 @@ export class LoanRequest extends AccountService {
   readonly downPaymentInput: Locator;
   readonly applyNowButton: Locator;
   readonly approvalStatus: Locator;
+  readonly errorMessage: Locator;
 
     constructor(page: Page) {
         super(page);
         this.requestLoanLink = page.locator('a[href="requestloan.htm"]');
         this.amountInput = page.locator('#amount');
-    this.downPaymentInput = page.locator('#downPayment');
-    this.applyNowButton = page.locator('input[type="button"][value="Apply Now"]');
-    this.approvalStatus = page.locator('td', { hasText: 'Approved' });
+        this.downPaymentInput = page.locator('#downPayment');
+        this.applyNowButton = page.locator('input[type="button"][value="Apply Now"]');
+        this.approvalStatus = page.locator('td', { hasText: 'Approved' });
     }
 
     async navigateToLoanRequest() {
@@ -38,4 +39,12 @@ export class LoanRequest extends AccountService {
     async clickRequestLoan() {
       await this.requestLoanLink.click();
     }
+
+    async goHome() {
+      await this.page.goto('https://parabank.parasoft.com/parabank/index.htm');
     }
+
+    async verifyLoanRejection() {
+      await expect(this.approvalStatus).not.toBeVisible();
+  }
+}
