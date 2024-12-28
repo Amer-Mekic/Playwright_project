@@ -9,7 +9,7 @@ test.describe('Account Services', () => {
 
     accountService = new AccountService(page);
 
-    await page.goto('https://parabank.parasoft.com/parabank/overview.htm');
+    await page.goto('https://parabank.parasoft.com/parabank/index.htm');
 
     await page.fill('input[name="username"]', 'jd123');
     await page.fill('input[name="password"]', 'pass1');
