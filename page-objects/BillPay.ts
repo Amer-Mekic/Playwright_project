@@ -28,6 +28,11 @@ export class BillPay extends AccountService {
     this.amountInput = page.locator('input[name="amount"]');
     this.sendPaymentButton = page.getByRole('button', { name: 'Send Payment' });
 }
+
+async goHome() {
+  await this.page.goto('https://parabank.parasoft.com/parabank/index.htm');
+}
+
 async navigateToBillPay() {
     await this.billPayLink.click();
   }
@@ -67,4 +72,63 @@ async navigateToBillPay() {
   async submitPayment() {
     await this.sendPaymentButton.click();
   }
+
+  
+
+  async payeeNameRequired() {
+    await expect(this.page.locator('span.error#validationModel-name')).toBeVisible();
+  }
+  
+  async addressRequired() {
+    await expect(this.page.locator('#validationModel-address')).toBeVisible();
+  }
+  
+  async cityRequired() {
+    await expect(this.page.locator('#validationModel-city')).toBeVisible();
+  }
+  
+  async stateRequired() {
+    await expect(this.page.locator('#validationModel-state')).toBeVisible();
+  }
+  
+  async zipCodeRequired() {
+    await expect(this.page.locator('#validationModel-zipCode')).toBeVisible();
+  }
+  
+  async phoneRequired() {
+    await expect(this.page.locator('#validationModel-phoneNumber')).toBeVisible();
+  }
+  
+  async accountRequired() {
+    await expect(this.page.locator('#validationModel-account-empty')).toBeVisible();
+  }
+
+  async verifyAccountRequired() {
+    await expect(this.page.locator('#validationModel-verifyAccount-empty')).toBeVisible();
+  }
+
+  async accountInvalid() {
+    await expect(this.page.locator('#validationModel-account-invalid')).toBeVisible();
+  }
+
+  async accountNonMatch() {
+    await expect(this.page.locator('#validationModel-verifyAccount-mismatch')).toBeVisible();
+  }
+
+  async amountRequired() {
+    await expect(this.page.getByText('The amount cannot be empty.')).toBeVisible();
+  }
+
+  async amountInvalid() {
+    await expect(this.page.locator('#validationModel-amount-invalid')).toBeVisible();
+  }
+  
+  async paymentCompleted() {
+    await expect(this.page.locator('h1.title', { hasText: 'Bill Payment Complete' })).toBeVisible();
+  }
+
+  async paymentNotCompleted() {
+    await expect(this.page.locator('h1.title', { hasText: 'Bill Payment Complete' })).not.toBeVisible();
+  }
+
 }
