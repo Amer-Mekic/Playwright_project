@@ -24,6 +24,10 @@ export class AccountService extends AbstractPage {
     this.logOutLink = page.locator('a[href="logout.htm"]');
   }
 
+  async goHome() {
+    await this.page.goto('https://parabank.parasoft.com/parabank/index.htm');
+  }
+
   async clickOpenNewAccount() {
     await this.openNewAccountLink.click();
     await expect(this.page).toHaveURL(/.*openaccount/);
