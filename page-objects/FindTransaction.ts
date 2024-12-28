@@ -74,5 +74,25 @@ export class FindTransaction extends AccountService {
         await this.amountInput.fill(amount);
         await this.findByAmountButton.click();
       }
-    
+
+      async checkTransactionIdError() {
+        await expect(this.page.locator('#transactionIdError')).toBeVisible();
+    }
+
+    async checkTransactionDateError() {
+        await expect(this.page.locator('#transactionDateError')).toBeVisible();
+    }
+
+    async checkDateRangeError() {
+        await expect(this.page.locator('#dateRangeError')).toBeVisible();
+    }
+
+    async checkAmountError() {
+        await expect(this.page.locator('#amountError')).toBeVisible();
+    }
+
+    async goHome() {
+      await this.page.goto('https://parabank.parasoft.com/parabank/index.htm');
+    }
 }
+    
