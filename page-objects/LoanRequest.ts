@@ -33,7 +33,7 @@ export class LoanRequest extends AccountService {
     }
   
     async verifyLoanApproval() {
-      await expect(this.approvalStatus).toBeVisible();
+      await expect(this.approvalStatus).toBeVisible({timeout:3000});
     }
         
     async clickRequestLoan() {

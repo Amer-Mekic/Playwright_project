@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { AbstractPage } from './AbstractPage';
 
 export class LogoutPage extends AbstractPage {
@@ -14,8 +14,10 @@ export class LogoutPage extends AbstractPage {
     await this.logoutButton.click();
   }
 
-  async isLogoutSuccessful(): Promise<boolean> {
+  async isLogoutSuccessful() {
     // Check if login page is visible after logging out -> means user successfully logged out
-    return this.page.locator('#loginPanel').isVisible({timeout:1000});
+    await expect(this.page).toHaveURL(
+          /.*index\.htm.*/
+        )
   }
 }

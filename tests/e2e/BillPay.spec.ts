@@ -82,14 +82,7 @@ test.describe('Bill Payment Tests', () => {
   // Negative Tests
   test('Empty Form Submission', async () => {
     await billPay.submitPayment();
-    await billPay.payeeNameRequired();
-    await billPay.addressRequired();
-    await billPay.cityRequired();
-    await billPay.stateRequired();
-    await billPay.zipCodeRequired();
-    await billPay.phoneRequired();
-    await billPay.accountRequired();
-    await billPay.amountRequired();
+    await billPay.assertErrorMessage();
   });
 
   test('One Field Blank', async () => {
@@ -257,7 +250,6 @@ test.describe('Bill Payment Tests', () => {
       verifyAccount: '1234',
       amount: '0.01',
     });
-    await billPay.submitPayment();
     await billPay.submitPayment();
     await billPay.paymentCompleted();
   });

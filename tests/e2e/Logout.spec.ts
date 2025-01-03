@@ -12,12 +12,11 @@ test.describe.parallel('Logout Functionality', () => {
     logoutPage = new LogoutPage(page);
 
     await loginPage.visit();
-    await loginPage.login('2', '1');
+    await loginPage.login('jd123', 'pass1');
   });
 
   test('Successful Logout and redirection to login page', async ({ page }) => {
     await logoutPage.logout();
-    await expect(logoutPage.isLogoutSuccessful()).toBeTruthy();
-    await expect(page).toHaveURL(/.*index\.htm.*/); // Check redirection to login page (which is also homepage)
+    await logoutPage.isLogoutSuccessful(); // Check redirection to login page (which is also homepage)
   });
 });

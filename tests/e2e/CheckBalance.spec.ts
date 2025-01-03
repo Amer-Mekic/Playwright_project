@@ -12,7 +12,7 @@ test.describe('Check Balance', () => {
 
     // Navigate and log in
     await loginPage.visit();
-    await loginPage.login('2', '1');
+    await loginPage.login('jd123', 'pass1');
 
     // Navigate to the account overview page
     await accountPage.visit();

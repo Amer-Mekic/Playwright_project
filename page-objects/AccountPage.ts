@@ -8,7 +8,7 @@ export class AccountPage extends AbstractPage {
   constructor(page: Page) {
     super(page);
     this.accountsTable = page.locator('#accountTable');
-    this.accountDetailsLink = page.locator('#accountTable tbody tr td a'); 
+    this.accountDetailsLink = page.locator('#accountTable tbody>tr>td>a'); 
   }
 
   async visit(): Promise<void> {
@@ -20,6 +20,6 @@ export class AccountPage extends AbstractPage {
   }
 
   async viewAccountDetails(): Promise<void> {
-    await this.accountDetailsLink.click();
+    await this.accountDetailsLink.nth(0).click();
   }
 }

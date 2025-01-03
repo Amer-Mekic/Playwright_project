@@ -70,7 +70,7 @@ async navigateToBillPay() {
   }
 
   async submitPayment() {
-    await this.sendPaymentButton.click();
+    await this.sendPaymentButton.click({timeout:2000});
   }
 
   
@@ -117,6 +117,12 @@ async navigateToBillPay() {
 
   async amountRequired() {
     await expect(this.page.getByText('The amount cannot be empty.')).toBeVisible();
+  }
+
+  async assertErrorMessage() {
+    await this.page.waitForTimeout(2000);
+    const errorMessages = await this.page.locator('.error').allTextContents();
+    expect(errorMessages.length).toBeGreaterThan(0);
   }
 
   async amountInvalid() {

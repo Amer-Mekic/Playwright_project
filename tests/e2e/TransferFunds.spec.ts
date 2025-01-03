@@ -12,7 +12,7 @@ test.describe('Transfer Funds', () => {
 
     // Visit login page and log in
     await loginPage.visit();
-    await loginPage.login('2', '1');
+    await loginPage.login('jd123', 'pass1');
 
     // Navigate to the transfer funds page
     await transferFundsPage.visit();
