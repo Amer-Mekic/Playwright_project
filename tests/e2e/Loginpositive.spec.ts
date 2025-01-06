@@ -17,7 +17,7 @@ test.describe.parallel.only('Login / Logout Flow', () => {
   // Positive Scenario
   test('Positive Scenario for login', async ({ page }) => {
     await page.context().clearCookies();
-    await loginPage.login('2', '1')
+    await loginPage.login('jd123', 'pass1')
     await expect(page).toHaveURL(/.*overview\.htm.*/);
     await page.goto('https://parabank.parasoft.com/parabank/logout.htm')
   })

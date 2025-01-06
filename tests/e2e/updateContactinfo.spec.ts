@@ -4,8 +4,8 @@ import { UpdateContactInformationPage } from '../../page-objects/UpdateContactIn
 test.describe('Update Contact Information', () => {
   test('should update contact information successfully', async ({ page }) => {
     // Test data
-    const username = 'ajdara';
-    const password = '7777';
+    const username = 'jd123';
+    const password = 'pass1';
     const newZipCode = '88';
 
     // Instantiate the UpdateContactInformationPage object
@@ -32,8 +32,8 @@ test.describe('Update Contact Information', () => {
 
   test('should not update contact information when ZIP code is not entered', async ({ page }) => {
     // Test data
-    const username = 'ajdara';
-    const password = '7777';
+    const username = 'jd123';
+    const password = 'pass1';
 
     // Instantiate the UpdateContactInformationPage object
     const updateContactInformationPage = new UpdateContactInformationPage(page);

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { ContactPage } from '../../page-objects/contactPage';
+import { ContactPage } from '../../page-objects/ContactPage';
 
 test.describe('Contact Form Functionality', () => {
   let contactPage: ContactPage;
@@ -11,7 +11,7 @@ test.describe('Contact Form Functionality', () => {
     await page.goto('https://parabank.parasoft.com/parabank/index.htm');
 
     // Log in using credentials
-    await contactPage.logIn('sekulja', '1921');
+    await contactPage.logIn('jd123', 'pass1');
   });
 
   // Positive test case

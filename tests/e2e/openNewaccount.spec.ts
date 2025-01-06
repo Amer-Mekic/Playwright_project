@@ -6,7 +6,7 @@ test('Open Checking and Savings accounts', async ({ page }) => {
 
   // Log in with new credentials
   await page.goto('https://parabank.parasoft.com/parabank/index.htm');
-  await openNewAccountPage.logIn('timur', '1946');
+  await openNewAccountPage.logIn('jd123', 'pass1');
 
   // Open Checking Account
   await openNewAccountPage.openNewAccount('0', '13566');  // '0' for CHECKING account type, '13566' is the account to fund from
