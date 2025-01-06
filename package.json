@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:smoke": "npx playwright test tests/e2e/Login.spec.ts tests/e2e/Register.spec.ts tests/e2e/TransferFunds.spec.ts tests/e2e/CheckBalance.spec.ts tests/e2e/Logout.spec.ts"
+    "test:smoke": "npx playwright test tests/e2e/Loginpositive.spec.ts tests/e2e/Register.spec.ts tests/e2e/TransferFunds.spec.ts tests/e2e/CheckBalance.spec.ts tests/e2e/Logout.spec.ts"
   },
   "keywords": [],
   "author": "",
