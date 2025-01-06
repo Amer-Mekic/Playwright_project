@@ -30,6 +30,9 @@ export class LoginPage extends AbstractPage {
       /.*login\.htm.*/
     )
   }
+  async assertSuccessfulRedirect(){
+    await expect(this.page).toHaveURL(/.*overview\.htm.*/);
+  }
   async assertErrorMessage() {
     await expect(this.page.locator('.error')).toBeVisible();
   }

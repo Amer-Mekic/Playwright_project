@@ -60,4 +60,8 @@ export class RegisterPage extends AbstractPage {
     await this.confirmPasswordField.fill(password);
     await this.registerButton.click();
   }
+
+  async assertSuccess(){
+    await expect(this.page.locator("#rightPanel #customerForm")).toBeHidden({timeout:5000});
+  }
 }

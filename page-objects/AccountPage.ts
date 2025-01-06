@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page , expect} from '@playwright/test';
 import { AbstractPage } from './AbstractPage';
 
 export class AccountPage extends AbstractPage {
@@ -21,5 +21,9 @@ export class AccountPage extends AbstractPage {
 
   async viewAccountDetails(): Promise<void> {
     await this.accountDetailsLink.nth(0).click();
+  }
+
+  async assertSuccessfulRedirect(){
+    await expect(this.page).toHaveURL(/activity\.htm/);
   }
 }

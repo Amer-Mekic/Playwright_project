@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 
-test.describe.parallel.only('Login / Logout Flow', () => {
+test.describe.parallel('Login Flow', () => {
   let loginPage: LoginPage
 
   // Before Hook
@@ -16,9 +16,8 @@ test.describe.parallel.only('Login / Logout Flow', () => {
  
   // Positive Scenario
   test('Positive Scenario for login', async ({ page }) => {
-    await page.context().clearCookies();
     await loginPage.login('jd123', 'pass1')
     await expect(page).toHaveURL(/.*overview\.htm.*/);
-    await page.goto('https://parabank.parasoft.com/parabank/logout.htm')
+    //await page.goto('https://parabank.parasoft.com/parabank/logout.htm')
   })
 })
