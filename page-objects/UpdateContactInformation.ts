@@ -1,51 +1,66 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
-export class UpdateContactInformation {
-  readonly firstNameField: Locator;
-  readonly lastNameField: Locator;
-  readonly addressField: Locator;
-  readonly cityField: Locator;
-  readonly stateField: Locator;
-  readonly zipCodeField: Locator;
-  readonly phoneField: Locator;
-  readonly updateProfileButton: Locator;
+export class UpdateContactInformationPage {
+  private page: Page;
+
+  // Locators
+  private usernameInput: Locator;
+  private passwordInput: Locator;
+  private loginButton: Locator;
+  private updateContactInfoLink: Locator;
+  private zipCodeInput: Locator;
+  private updateProfileButton: Locator;
+  private profileUpdatedHeading: Locator;
+  private successMessage: Locator;
 
   constructor(page: Page) {
-    this.firstNameField = page.locator('#customer.firstName');
-    this.lastNameField = page.locator('#customer.lastName');
-    this.addressField = page.locator('#customer.address.street');
-    this.cityField = page.locator('#customer.address.city');
-    this.stateField = page.locator('#customer.address.state');
-    this.zipCodeField = page.locator('#customer.address.zipCode');
-    this.phoneField = page.locator('#customer.phoneNumber');
-    this.updateProfileButton = page.locator('input[type="button"]');
+    this.page = page;
+
+    // Initialize locators
+    this.usernameInput = page.locator('input[name="username"]');
+    this.passwordInput = page.locator('input[name="password"]');
+    this.loginButton = page.getByRole('button', { name: 'Log In' });
+    this.updateContactInfoLink = page.getByRole('link', { name: 'Update Contact Info' });
+    this.zipCodeInput = page.locator('[id="customer\\.address\\.zipCode"]');
+    this.updateProfileButton = page.getByRole('button', { name: 'Update Profile' });
+    this.profileUpdatedHeading = page.getByRole('heading', { name: 'Profile Updated' });
+    this.successMessage = page.getByText('Your updated address and');
   }
 
-  async fillContactInfo(
-    firstName: string,
-    lastName: string,
-    address: string,
-    city: string,
-    state: string,
-    zipCode: string,
-    phone: string
-  ): Promise<void> {
-    await this.firstNameField.fill(firstName);
-    await this.lastNameField.fill(lastName);
-    await this.addressField.fill(address);
-    await this.cityField.fill(city);
-    await this.stateField.fill(state);
-    await this.zipCodeField.fill(zipCode);
-    await this.phoneField.fill(phone);
+  // Log in to the application
+  async login(username: string, password: string): Promise<void> {
+    await this.usernameInput.click();
+    await this.usernameInput.fill(username);
+    await this.passwordInput.click();
+    await this.passwordInput.fill(password);
+    await this.loginButton.click();
   }
 
-  async updateProfile(): Promise<void> {
+  // Navigate to Update Contact Info page
+  async navigateToUpdateContactInfo(): Promise<void> {
+    await this.updateContactInfoLink.click();
+  }
+
+  // Update the ZIP code
+  async updateZipCode(newZipCode: string): Promise<void> {
+    await this.zipCodeInput.click();
+    await this.zipCodeInput.fill(newZipCode);
+  }
+
+  // Submit the updated contact information
+  async submitUpdatedContactInfo(): Promise<void> {
     await this.updateProfileButton.click();
   }
 
-  async assertUpdateSuccess(): Promise<void> {
-    await expect(this.firstNameField).toHaveValue('John');
-    await expect(this.lastNameField).toHaveValue('Doe');
-    await expect(this.addressField).toHaveValue('123 New Address');
+  // Verify that the ZIP code has been updated
+  async verifyZipCodeUpdated(newZipCode: string): Promise<void> {
+    const zipCodeValue = await this.zipCodeInput.inputValue();
+    expect(zipCodeValue).toBe(newZipCode);
+  }
+
+  // Verify that the ZIP code input remains empty
+  async verifyZipCodeNotUpdated(): Promise<void> {
+    const zipCodeValue = await this.zipCodeInput.inputValue();
+    expect(zipCodeValue).toBe('');
   }
 }
