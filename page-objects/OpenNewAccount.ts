@@ -1,25 +1,45 @@
-import { Locator, Page } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class OpenNewAccount {
-  readonly accountTypeSelector: Locator;
-  readonly fromAccountIdSelector: Locator;
-  readonly openAccountButton: Locator;
+  private page: Page;
+  private usernameInput: Locator;
+  private passwordInput: Locator;
+  private loginButton: Locator;
+  private openNewAccountLink: Locator;
+  private accountTypeDropdown: Locator;
+  private fromAccountDropdown: Locator;
+  private openAccountButton: Locator;
+  private accountOpenedHeading: Locator;
 
   constructor(page: Page) {
-    this.accountTypeSelector = page.locator('#type');
-    this.fromAccountIdSelector = page.locator('#fromAccountId');
-    this.openAccountButton = page.locator('input[type="submit"]');
+    this.page = page;
+    this.usernameInput = page.locator('input[name="username"]');
+    this.passwordInput = page.locator('input[name="password"]');
+    this.loginButton = page.getByRole('button', { name: 'Log In' });
+    this.openNewAccountLink = page.getByRole('link', { name: 'Open New Account' });
+    this.accountTypeDropdown = page.locator('#type');
+    this.fromAccountDropdown = page.locator('#fromAccountId');
+    this.openAccountButton = page.getByRole('button', { name: 'Open New Account' });
+    this.accountOpenedHeading = page.getByRole('heading', { name: 'Account Opened!' });
   }
 
-  async selectAccountType(type: string): Promise<void> {
-    await this.accountTypeSelector.selectOption({ label: type });
+  // Log in to the application
+  async logIn(username: string, password: string): Promise<void> {
+    await this.usernameInput.fill(username);
+    await this.passwordInput.fill(password);
+    await this.loginButton.click();
   }
 
-  async selectFromAccount(accountId: string): Promise<void> {
-    await this.fromAccountIdSelector.selectOption({ value: accountId });
-  }
-
-  async openAccount(): Promise<void> {
+  // Open a new account
+  async openNewAccount(accountType: string, fromAccount: string): Promise<void> {
+    await this.openNewAccountLink.click();
+    await this.accountTypeDropdown.selectOption(accountType);
+    await this.fromAccountDropdown.selectOption(fromAccount);
     await this.openAccountButton.click();
+  }
+
+  // Verify if the account was opened successfully
+  async verifyAccountOpened(): Promise<void> {
+    await expect(this.accountOpenedHeading).toBeVisible();
   }
 }
