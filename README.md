@@ -17,8 +17,8 @@ Ensure the following are installed on your machine:
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/Amer-Mekic/Playwright_project.git
+   cd Playwright_project
    ```
 
 2. **Install dependencies:**
